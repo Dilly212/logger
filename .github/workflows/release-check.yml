@@ -1,0 +1,86 @@
+name: Release Readiness Check
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - package.json
+      - package-lock.json
+      - src/**
+  workflow_dispatch:
+
+jobs:
+  detect-version-bump:
+    name: Detect version bump
+    runs-on: ubuntu-latest
+    outputs:
+      bumped: ${{ steps.bump.outputs.bumped }}
+      previous_version: ${{ steps.bump.outputs.previous_version }}
+      current_version: ${{ steps.bump.outputs.current_version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Compare package version
+        id: bump
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CURRENT_VERSION=$(node -e "const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));process.stdout.write(pkg.version || '')")
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PREVIOUS_VERSION=$(git show HEAD^:package.json 2>/dev/null | node -e "let s='';process.stdin.on('data',d=>s+=d);process.stdin.on('end',()=>{try{process.stdout.write((JSON.parse(s).version||''))}catch{process.stdout.write('')}})")
+          else
+            PREVIOUS_VERSION=$(git show "${{ github.event.before }}":package.json 2>/dev/null | node -e "let s='';process.stdin.on('data',d=>s+=d);process.stdin.on('end',()=>{try{process.stdout.write((JSON.parse(s).version||''))}catch{process.stdout.write('')}})")
+          fi
+
+          if [ -z "$PREVIOUS_VERSION" ]; then
+            echo "No previous version found; treating as bumped."
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+          elif [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "Version bumped: $PREVIOUS_VERSION -> $CURRENT_VERSION"
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version unchanged: $CURRENT_VERSION"
+            echo "bumped=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "previous_version=$PREVIOUS_VERSION" >> "$GITHUB_OUTPUT"
+          echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+
+  release-readiness:
+    name: Run release checks
+    runs-on: ubuntu-latest
+    needs: detect-version-bump
+    if: needs.detect-version-bump.outputs.bumped == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run test suite
+        run: npm test
+
+      - name: Run examples if present
+        run: npm run --if-present examples
+
+      - name: Validate package tarball
+        run: npm pack --dry-run
+
+      - name: Release check summary
+        run: |
+          echo "Release checks passed for version ${{ needs.detect-version-bump.outputs.current_version }}"
+          echo "Previous version: ${{ needs.detect-version-bump.outputs.previous_version }}"
