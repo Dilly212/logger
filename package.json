@@ -1,0 +1,48 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "",
+	"main": "./src/index.js",
+	"exports": "./src/index.js",
+
+  "scripts": {
+    "test": "node ./src/test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dilly212/logger.git"
+  },
+  "engines": {
+		"node": "^12.17.0 || ^14.13 || >=16.0.0"
+	},
+  "keywords": [
+    	"color",
+		"colour",
+		"colors",
+		"terminal",
+		"console",
+		"cli",
+		"string",
+		"ansi",
+		"style",
+		"styles",
+		"formatting",
+		"rgb",
+		"256",
+		"shell",
+		"log",
+		"logging",
+		"command-line",
+		"text"
+  ],
+  "author": "",
+  "license": "MIT",
+	"type": "module",
+  "bugs": {
+    "url": "https://github.com/Dilly212/logger/issues"
+  },
+  "homepage": "https://github.com/Dilly212/logger#readme",
+  "dependencies": {
+    "chalk": "5.6.2"
+  }
+}
