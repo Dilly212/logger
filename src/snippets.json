@@ -1,0 +1,240 @@
+{
+  "Logger Import": {
+    "prefix": "logger.import",
+    "body": [
+      "import * as logger from \"${1:logger}\";"
+    ],
+    "description": "Logger: import all logger functions"
+  },
+  "Logger Info": {
+    "prefix": "logger.info",
+    "body": [
+      "logger.info(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: info (cyan)"
+  },
+  "Logger Announce": {
+    "prefix": "logger.announce",
+    "body": [
+      "logger.announce(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: announce (bold cyan)"
+  },
+  "Logger Results": {
+    "prefix": "logger.results",
+    "body": [
+      "logger.results(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: results (magenta)"
+  },
+  "Logger Debug": {
+    "prefix": "logger.debug",
+    "body": [
+      "logger.debug(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: debug (bold magenta)"
+  },
+  "Logger Error": {
+    "prefix": "logger.error",
+    "body": [
+      "logger.error(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: error (red)"
+  },
+  "Logger Failure": {
+    "prefix": "logger.failure",
+    "body": [
+      "logger.failure(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: failure (bold red)"
+  },
+  "Logger Step": {
+    "prefix": "logger.step",
+    "body": [
+      "logger.step(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: step (green)"
+  },
+  "Logger Complete": {
+    "prefix": "logger.complete",
+    "body": [
+      "logger.complete(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: complete (bold green)"
+  },
+  "Logger Warning": {
+    "prefix": "logger.warning",
+    "body": [
+      "logger.warning(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: warning (yellow)"
+  },
+  "Logger Advise": {
+    "prefix": "logger.advise",
+    "body": [
+      "logger.advise(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: advise (bold yellow)"
+  },
+  "Logger Message": {
+    "prefix": "logger.message",
+    "body": [
+      "logger.message(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: message (blue)"
+  },
+  "Logger Note": {
+    "prefix": "logger.note",
+    "body": [
+      "logger.note(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: note (bold blue)"
+  },
+  "Logger Title": {
+    "prefix": "logger.title",
+    "body": [
+      "logger.title(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: title (white)"
+  },
+  "Logger Text": {
+    "prefix": "logger.text",
+    "body": [
+      "logger.text(${1:reqId}, ${2:\"message\"}, ${3:target});"
+    ],
+    "description": "Logger: text (bold white)"
+  },
+  "Logger Status": {
+    "prefix": "logger.status",
+    "body": [
+      "logger.status(${1:reqId}, ${2:\"status message\"}, ${3:isOk});"
+    ],
+    "description": "Logger: status (green on truthy target, red on falsy target)"
+  },
+  "Logger Status Bold": {
+    "prefix": "logger.statusBold",
+    "body": [
+      "logger.statusBold(${1:reqId}, ${2:\"status message\"}, ${3:isOk});"
+    ],
+    "description": "Logger: statusBold (bold green/red based on target)"
+  },
+  "Logger Status Line": {
+    "prefix": "logger.statusLine",
+    "body": [
+      "logger.statusLine(${1:\"-\"}, ${2:isOk}, ${3:{ bold: false }});"
+    ],
+    "description": "Logger: full-width status separator line (green/red by boolean target)"
+  },
+  "Logger JSON": {
+    "prefix": "logger.json",
+    "body": [
+      "logger.json(${1:reqId}, ${2:\"payload\"}, ${3:data}, ${4:{ timestamp: true, space: 2 }});"
+    ],
+    "description": "Logger: pretty JSON output with circular-safe stringify"
+  },
+  "Logger Time Start": {
+    "prefix": "logger.time",
+    "body": [
+      "logger.time(${1:reqId}, ${2:\"operation\"}, ${3:\"start\"}, ${4:{ label: \"op-timer\", timestamp: true }});"
+    ],
+    "description": "Logger: start a named timer"
+  },
+  "Logger Time End": {
+    "prefix": "logger.timeEnd",
+    "body": [
+      "logger.timeEnd(${1:reqId}, ${2:\"operation\"}, ${3:\"end\"}, ${4:{ label: \"op-timer\", timestamp: true }});"
+    ],
+    "description": "Logger: stop a named timer"
+  },
+  "Logger Table": {
+    "prefix": "logger.table",
+    "body": [
+      "logger.table(${1:reqId}, ${2:\"table title\"}, ${3:rows}, ${4:{ timestamp: true }});"
+    ],
+    "description": "Logger: table output with colored header"
+  },
+  "Logger Table Bold": {
+    "prefix": "logger.tableBold",
+    "body": [
+      "logger.tableBold(${1:reqId}, ${2:\"table title\"}, ${3:rows}, ${4:{ timestamp: true }});"
+    ],
+    "description": "Logger: table output with bold colored header"
+  },
+  "Logger Line Cyan": {
+    "prefix": "logger.lineCyan",
+    "body": [
+      "logger.lineCyan(${1:\"-\"});"
+    ],
+    "description": "Logger: cyan full-width separator"
+  },
+  "Logger Line Magenta": {
+    "prefix": "logger.lineMagenta",
+    "body": [
+      "logger.lineMagenta(${1:\"=\"});"
+    ],
+    "description": "Logger: magenta full-width separator"
+  },
+  "Logger Line Red": {
+    "prefix": "logger.lineRed",
+    "body": [
+      "logger.lineRed(${1:\"!\"});"
+    ],
+    "description": "Logger: red full-width separator"
+  },
+  "Logger Line Green": {
+    "prefix": "logger.lineGreen",
+    "body": [
+      "logger.lineGreen(${1:\"+\"});"
+    ],
+    "description": "Logger: green full-width separator"
+  },
+  "Logger Line Yellow": {
+    "prefix": "logger.lineYellow",
+    "body": [
+      "logger.lineYellow(${1:\"~\"});"
+    ],
+    "description": "Logger: yellow full-width separator"
+  },
+  "Logger Line Blue": {
+    "prefix": "logger.lineBlue",
+    "body": [
+      "logger.lineBlue(${1:\".\"});"
+    ],
+    "description": "Logger: blue full-width separator"
+  },
+  "Logger Line White": {
+    "prefix": "logger.lineWhite",
+    "body": [
+      "logger.lineWhite(${1:\"_\"});"
+    ],
+    "description": "Logger: white full-width separator"
+  },
+  "Logger With Timestamp": {
+    "prefix": "logger.timestamp",
+    "body": [
+      "logger.${1:info}(${2:reqId}, ${3:\"message\"}, ${4:target}, { timestamp: true });"
+    ],
+    "description": "Logger: call any log function with timestamp option"
+  },
+  "Logger DEBUG Warn": {
+    "prefix": "logger.debug.warn",
+    "body": [
+      "process.env.DEBUG = \"warn\";"
+    ],
+    "description": "Logger: set DEBUG minimum level to warn"
+  },
+  "Logger DEBUG Debug": {
+    "prefix": "logger.debug.debug",
+    "body": [
+      "process.env.DEBUG = \"debug\";"
+    ],
+    "description": "Logger: set DEBUG minimum level to debug"
+  },
+  "Logger DEBUG Silent": {
+    "prefix": "logger.debug.silent",
+    "body": [
+      "process.env.DEBUG = \"silent\";"
+    ],
+    "description": "Logger: disable logger output"
+  }
+}

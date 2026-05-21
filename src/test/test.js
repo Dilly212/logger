@@ -44,3 +44,34 @@ logger.status("example", "status true should be green", true);
 logger.status("example", "status false should be red", false);
 logger.statusBold("example", "status bold true should be green", 1);
 logger.statusBold("example", "status bold false should be red", 0);
+logger.statusLine("-", true);
+logger.statusLine("=", false, { bold: true });
+
+// table wrappers
+logger.table("example", "table output", [
+	{ id: 1, state: "ok" },
+	{ id: 2, state: "warn" },
+], { timestamp: true });
+logger.tableBold("example", "table bold output", {
+	service: "logger",
+	healthy: true,
+});
+
+// json safe stringify + timestamp option
+const circular = { id: 1, label: "circular" };
+circular.self = circular;
+logger.json("example", "json output", circular, { timestamp: true, space: 2 });
+
+// time wrappers
+logger.time("example", "timed operation", "start", { label: "example-timer", timestamp: true });
+for (let i = 0; i < 100000; i += 1) {
+	Math.sqrt(i);
+}
+logger.timeEnd("example", "timed operation", "end", { label: "example-timer", timestamp: true });
+
+// level filter by DEBUG
+const previousDebugLevel = process.env.DEBUG;
+process.env.DEBUG = "warn";
+logger.debug("example", "this debug log should be suppressed");
+logger.warning("example", "this warning log should be visible");
+process.env.DEBUG = previousDebugLevel;
